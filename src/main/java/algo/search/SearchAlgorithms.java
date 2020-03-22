@@ -16,7 +16,7 @@ public class SearchAlgorithms {
 		int beg = 0;
 		int end = array.length - 1;
 		while(beg <= end) {
-			int mid = (beg + end) / 2;
+			int mid = beg + (end- beg) / 2;     // same as (beg + end) /2 - used to avoid overflow
 			if( element > array[mid]) {
 				beg = mid + 1;
 			}

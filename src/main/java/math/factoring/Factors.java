@@ -1,7 +1,9 @@
 package math.factoring;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 public class Factors {
 
@@ -41,8 +43,41 @@ public class Factors {
 	 return true;
  }
  
+ 
+ public static ArrayList<Integer> sieveOfErat(int n){
+	 boolean[] primes = new boolean[n + 1];
+	 ArrayList<Integer> result = new ArrayList<Integer>();
+	 Arrays.fill(primes, true);
+	 
+	 for(int p = 2; p*p <= n ; p++) {
+		 for(int i = p * p; i <= n; i+=p) {
+			 primes[i] = false;
+		 }
+	 }
+	 
+	 for(int i = 2; i <=n ; i++) {
+		 if(primes[i] == true) {
+			 result.add(i);
+		 }
+	 }
+	 
+	 return result;
+ }
+ 
+ public static int exactly3Divisors(int N)
+ {
+     ArrayList<Integer> primes = sieveOfErat((int)Math.sqrt(N));
+     return primes.size();
+ }
+ 
+ 
  public static void main(String[] args) {
-	 System.out.println(Factors.getFactors2(85416));
+	 //System.out.println(Factors.getFactors2(85416));
+	/* ArrayList<Integer> results = sieveOfErat(50);
+	 for(int result: results) {
+		 System.out.print(result + " ");
+	 } */
+	 System.out.println(exactly3Divisors(30));
  }
 	
 }

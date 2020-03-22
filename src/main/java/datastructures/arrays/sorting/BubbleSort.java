@@ -2,6 +2,7 @@ package datastructures.arrays.sorting;
 
 public class BubbleSort {
 
+	//O(n^2)
 	public void sort(int arr[]) {
 		int n = arr.length;
 		for (int i = 0; i < n; i++) {

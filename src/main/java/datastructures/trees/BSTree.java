@@ -203,4 +203,42 @@ public class BSTree {
 	public int findMaxElement() {
 		return findMax().getData();
 	}
+	
+	public int height(TreeNode root) {
+		if(root == null) {
+			return 0;
+		}
+		else {
+			int lHeight = height(root.getLeft());
+			int rHeight = height(root.getRight());
+			 return Math.max(lHeight, rHeight) + 1;    // add 1 for height of root
+		}
+	}
+	
+	public int height() {
+		return height(root);
+	}
+	
+	public void printGivenLevel(TreeNode root, int level) {
+		if(root == null) {
+			return;
+		}
+	    if(level == 1) {
+			System.out.println(root.getData());
+		}
+		else if(level > 1) {
+			printGivenLevel(root.getLeft(), level -1);
+			printGivenLevel(root.getRight(), level - 1);
+			
+		}
+	}
+	
+	public void printLevelOrder(TreeNode root) {
+		int h = height(root);
+		for(int i =1 ; i <= h; i++) {
+			printGivenLevel(root, i);
+		}
+	}
+	
+	
 }
