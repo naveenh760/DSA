@@ -54,4 +54,17 @@ public class EasyProbs {
 	public static void powerSet(String input) {
 		powerSet(input, 0, "");
 	}
+	
+	
+	public static void reverseArray(int arr[], int start, int end) {
+		if( start >= end) {
+			return;
+		}
+		
+		int temp = arr[end];
+		arr[end] = arr[start];
+		arr[start] = temp;
+		
+		reverseArray(arr, start + 1, end - 1);
+	}
 }

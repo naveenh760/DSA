@@ -26,4 +26,12 @@ class SearchAlgorithmsTest {
 		int pos = SearchAlgorithms.binarySearch(array, 5);
 		assertEquals(-1, pos);
 	}
+	
+	@Test
+	void testCountOccurences() {
+		int[] array = {1,2,2,2,3};
+		assertEquals(3, SearchAlgorithms.countOccurences(array, 2));
+		assertEquals(1, SearchAlgorithms.countOccurences(array, 3));
+		assertEquals(0, SearchAlgorithms.countOccurences(array, 4));
+	}
 }

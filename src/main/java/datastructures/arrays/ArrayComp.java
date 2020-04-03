@@ -6,7 +6,9 @@ import java.util.Collections;
 public class ArrayComp {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		int[] arr = {4,2,2,2,4};
+		int[] arr1= {5,5,5};
+		stockBuySell(arr);
 
 	}
 	
@@ -104,4 +106,48 @@ public class ArrayComp {
 		return profit;
 	}
 
+	public static void stockBuySell(int arr[]) {
+		int n = arr.length;
+		boolean buy = true;
+		boolean sell = false;
+		ArrayList<Integer> buyDays = new ArrayList<Integer>();
+		ArrayList<Integer> sellDays = new ArrayList<Integer>();
+		
+		for(int i=1; i < n; i++) {
+			if(buy == true && sell == false) {
+				if(arr[i] > arr[i - 1]) {
+					buyDays.add(i - 1);
+					buy = false;
+					sell = true;
+				}
+			}
+			
+			if(buy == false && sell == true) {
+				if(arr[i] < arr[i -1]) {
+					sellDays.add(i - 1);
+					buy = true;
+					sell = false;
+				}
+				else if( i == n - 1) {
+					sellDays.add(i);
+				}
+			}
+			
+		}
+		
+		StringBuilder output = new StringBuilder();
+		if(buyDays.size() == 0) {
+			output.append("No Profit");
+		}
+		else {
+			int i;
+			for(i=0; i < buyDays.size() - 1; i++) {
+				output.append("("+ buyDays.get(i) + " " + sellDays.get(i) + ")");
+				output.append(" ");
+			}
+			
+			output.append("("+ buyDays.get(i) + " " + sellDays.get(i) + ")");
+		}
+		System.out.print(output.toString());
+	}
 }
