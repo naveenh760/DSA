@@ -1,8 +1,8 @@
 package datastructures.linkedlist;
 
-public class SinglyLinkedList {
+public class SinglyLinkedList implements ILinkedList{
 
-	private ListNode head;
+	protected ListNode head;
 
 	public ListNode getHead() {
 		return head;
@@ -12,6 +12,7 @@ public class SinglyLinkedList {
 		this.head = head;
 	}
 	
+	@Override
 	public int size() {
 		int size = 0;
 		ListNode current = head;
@@ -23,12 +24,15 @@ public class SinglyLinkedList {
 		return size;
 	}
 	
+	
+	@Override
 	public void insertAtBegin(int data) {
 		ListNode newNode = new ListNode(data);
 		newNode.setNext(head);
 		head = newNode;
 	}
 	
+	@Override
 	public void insertAtEnd(int data) {
 		ListNode newNode = new ListNode(data);
 		ListNode current = head;
