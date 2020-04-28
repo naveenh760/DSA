@@ -129,7 +129,7 @@ public class SllProblems extends SinglyLinkedList{
 	
 	public void reverseK(int k) {
 		ListNode current = head; 
-		ListNode prevFirst = null;
+		ListNode firstOfPrevPass = null;
 		boolean isFirstPass = true;
 		
 		while(current != null) {
@@ -149,9 +149,9 @@ public class SllProblems extends SinglyLinkedList{
 				isFirstPass = false;
 			}
 			else {
-				prevFirst.setNext(prev);
+				firstOfPrevPass.setNext(prev);
 			}
-			prevFirst = first;
+			firstOfPrevPass = first;
 		}
 	}
 	
