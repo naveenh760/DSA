@@ -1,4 +1,4 @@
-package techniques;
+package solvingmethods.bit;
 
 public class Bitwise {
 

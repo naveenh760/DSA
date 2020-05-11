@@ -37,6 +37,7 @@ public class MinHeap {
 	}
 	
 	public void minHeapify(int i) {
+		//Assumption: Left and right of i is minheapified
 		int lt = left(i); 
 		int rt = right(i);
 		int smallest = i;
@@ -75,6 +76,29 @@ public class MinHeap {
 		size--;
 		minHeapify(0);
 		return arr[size];	
+	}
+	
+	
+	void decreaseKey(int i, int x) {
+		arr[i] = x;
+		while(i != 0 && arr[parent(i)] > arr[i]) {
+			swap(arr, i, parent(i));
+			i = parent(i);
+		}
+	}
+	
+	void deleteKey(int i) {
+		if(i >= size) {
+			return;
+		}
+		decreaseKey(i, Integer.MIN_VALUE);
+		extractMin();
+	}
+	
+	void buildHeap() {
+		for(int i = (size - 2) / 2; i >= 0; i--) {
+			minHeapify(i);
+		}
 	}
 	
 	public static void swap(int[] arr, int i, int j) {
