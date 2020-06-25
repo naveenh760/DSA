@@ -1,4 +1,4 @@
-package datastructures.linkedlist;
+ package datastructures.linkedlist;
 
 public class SllProblems extends SinglyLinkedList{
 

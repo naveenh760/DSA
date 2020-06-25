@@ -83,4 +83,16 @@ public class ArrayProbs {
 		return res;
 	}
 	
+	
+	public static int minAdjDiff(int arr[]) {
+		int n = arr.length;
+		int minDiff = Integer.MAX_VALUE;
+		for(int i = 0; i < n; i++) {
+			int adj = (i + 1) % n;
+			int absDiff = Math.abs(arr[i] - arr[adj]);
+			minDiff = Math.min(minDiff, absDiff);
+		}
+		return minDiff;
+	}
+	
 }

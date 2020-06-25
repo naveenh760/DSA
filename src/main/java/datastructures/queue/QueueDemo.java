@@ -8,6 +8,7 @@ public class QueueDemo {
 		q.enqueue(2);
 		q.enqueue(3);
 		System.out.println(q.dequeue());
+		
 
 	}
 

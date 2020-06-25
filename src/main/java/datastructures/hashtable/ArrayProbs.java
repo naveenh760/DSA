@@ -1,5 +1,6 @@
 package datastructures.hashtable;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -198,5 +199,92 @@ public class ArrayProbs {
 	}
 	
 	
+	public static boolean zeroSumSubArray(int arr[]) {
+		int n = arr.length;
+		for(int i = 0; i < n;i++) {
+			int currSum = 0;
+			for(int j = i; j < n; j++) {
+				currSum += arr[j];
+				if(currSum == 0) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	
+	public static boolean zeroSumSubArray1(int arr[]) {
+		int n = arr.length;
+		HashSet<Integer> hs = new HashSet<Integer>();
+		int prefixSum = 0;
+		for(int i = 0; i < n; i++) {
+			prefixSum += arr[i];
+			if(hs.contains(prefixSum)) {
+				return true;
+			}
+			if(prefixSum == 0) {
+				return true;
+			}
+			hs.add(prefixSum);
+		}
+		return false;
+	}
+	
+	
+	public static boolean subArraySum(int arr[] , int sum) {
+		int n = arr.length;
+		for(int i = 0; i < n;i++) {
+			int currSum = 0;
+			for(int j = i; j < n; j++) {
+				currSum += arr[j];
+				if(currSum == sum) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	
+	public static boolean subArraySum1(int arr[], int sum) {
+		int n = arr.length;
+		HashSet<Integer> hs = new HashSet<Integer>();
+		int prefixSum = 0;
+		for(int i = 0; i < n; i++) {
+			prefixSum += arr[i];
+			if(hs.contains(prefixSum - sum)) {
+				return true;
+			}
+			if(prefixSum == sum) {
+				return true;
+			}
+			hs.add(prefixSum);
+		}
+		return false;
+	}
+	
+	
+	public static int subArraySumCount(int arr[], int sum) {
+		int n = arr.length;
+		HashMap<Integer, Integer> map = new HashMap<Integer,Integer>();
+		int count = 0;
+		int prefixSum = 0;
+		for(int i = 0; i < n; i++) {
+			prefixSum += arr[i];
+			if(map.containsKey(prefixSum - sum)) {
+				count += map.get(prefixSum - sum);
+			}
+			if(prefixSum == sum) {
+				count++;
+			}
+			
+			if(map.containsKey(prefixSum)) {
+				map.put(prefixSum, map.get(prefixSum) + 1);
+			}
+			else {
+				map.put(prefixSum, 1);
+			}
+		}
+		return count;
+	}
 
 }

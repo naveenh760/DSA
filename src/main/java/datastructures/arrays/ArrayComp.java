@@ -23,7 +23,7 @@ public class ArrayComp {
 					break;
 				}
 			}
-			if(flag) {
+			if(flag) {	
 				leaders.add(arr[i]);
 			}
 		}
@@ -115,6 +115,7 @@ public class ArrayComp {
 		
 		for(int i=1; i < n; i++) {
 			if(buy == true && sell == false) {
+				//Price increased, so buy on previous day
 				if(arr[i] > arr[i - 1]) {
 					buyDays.add(i - 1);
 					buy = false;
@@ -123,11 +124,13 @@ public class ArrayComp {
 			}
 			
 			if(buy == false && sell == true) {
+				//Already bought and price decreased so sell on previous day
 				if(arr[i] < arr[i -1]) {
 					sellDays.add(i - 1);
 					buy = true;
 					sell = false;
 				}
+				//Already bought and last day , so sell on last day
 				else if( i == n - 1) {
 					sellDays.add(i);
 				}

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Stack;
 
 public class AdjListGraph implements Graph{
 	int vertices;
@@ -229,6 +230,54 @@ public class AdjListGraph implements Graph{
 			
 		}
 		return topSorting;
+	}
+	
+	
+	public boolean isCyclic() {
+		int[] inDegrees = computeIndegree();
+		int count = 0;
+		Queue<Integer> q = new LinkedList<Integer>();
+		for(int i = 0; i < inDegrees.length; i++) {
+			if(inDegrees[i] == 0) {
+				q.add(i);
+			}
+		}
+		while(!q.isEmpty()) {
+			int u = q.poll();
+		    count++;
+			for(int v: adjList.get(u)) {
+				inDegrees[v]--;
+				if(inDegrees[v] == 0) {
+					q.add(v);
+				}
+			}
+			
+		}
+		return count != vertices;
+	}
+	
+	
+	void DFSRecTopSort(int source, boolean[] visited, Stack<Integer> s) {
+		visited[source] = true;
+		for(int v: adjList.get(source)) {
+			if(visited[v] == false) {
+				DFSRecTopSort(v, visited,s);
+			}
+		}
+		s.push(source);
+
+	}
+	
+	
+	void TopSortDFS() {
+		boolean[] visited = new boolean[vertices];
+		Stack<Integer> s = new Stack<Integer>();
+		for(int i = 0 ; i < vertices; i++) {
+			if(visited[i] == false) {
+				DFSRecTopSort(i, visited,s);
+			}
+		}
+		
 	}
 	
 	@Override
