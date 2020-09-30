@@ -15,7 +15,7 @@ public class StackDemo {
 		stack.push(2);
 		stack.push(3);
 		stack.pop();
-		System.out.println(stack.top());
+		System.out.println(stack.peek());
 	}
 	
 	public static void linkedListStack() {
@@ -24,7 +24,7 @@ public class StackDemo {
 		stack.push(2);
 		stack.push(3);
 		stack.pop();
-		System.out.println(stack.top());
+		System.out.println(stack.peek());
 	}
 
 }

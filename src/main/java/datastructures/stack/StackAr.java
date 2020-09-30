@@ -4,7 +4,6 @@ public class StackAr implements IStack {
 	
 	int[] array;
     int capacity;
-    int size;
     int top;
     
 	
@@ -12,33 +11,50 @@ public class StackAr implements IStack {
 		super();
 		this.capacity = capacity;
 		array = new int[capacity];
-		size = 0;
 		top = -1;
 	}
 
 	@Override
 	public void push(int element) {
-		top++;
-		array[top] = element;
-		size++;
-
+		if(top < capacity -1) {
+			top++;
+			array[top] = element;
+		}
+		else {
+			// throw Overflow
+		}
 	}
 
 	@Override
 	public int pop() {
-		int element = array[top];
-		top--;
-		return element;
+		if(top >= 0) {
+			int element = array[top];
+			top--;
+			return element;
+		}
+		else {
+			// throw underflow
+			return -1;
+		}
 	}
 
 	@Override
-	public int top() {
-		return array[top];
+	public int peek() {
+		if(top >= 0) {
+			return array[top];
+		}
+		else {
+			return -1;
+		}
 	}
 
 	@Override
 	public boolean isEmpty() {
-		return (size == 0);
+		return (top == -1);
+	}
+	
+	public int size() {
+		return top + 1;
 	}
 
 }

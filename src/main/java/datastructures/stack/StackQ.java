@@ -28,7 +28,7 @@ public class StackQ implements IStack {
 	}
 
 	@Override
-	public int top() {
+	public int peek() {
 		return q1.peek();
 	}
 

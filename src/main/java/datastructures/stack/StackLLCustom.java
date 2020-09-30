@@ -32,7 +32,7 @@ public class StackLLCustom implements IStack {
 	}
 
 	@Override
-	public int top() {
+	public int peek() {
 		if(top == null) {
 			return -1;
 		}

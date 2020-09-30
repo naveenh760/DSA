@@ -81,6 +81,20 @@ public class SllProblems extends SinglyLinkedList{
 		
 	}
 	
+	boolean checkSorted() {
+		if(head == null) {
+			return true;
+		}
+		ListNode current = head;
+		while(current.getNext() != null) {
+			if(current.getData() > current.getNext().getData()) {
+				return false;
+			}
+			current = current.getNext();
+		}
+		return true;
+	}
+	
 	
 	public ListNode recReverse(ListNode head) {
 		if(head == null || head.getNext() == null) {

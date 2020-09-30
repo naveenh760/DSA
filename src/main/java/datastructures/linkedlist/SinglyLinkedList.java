@@ -50,17 +50,16 @@ public class SinglyLinkedList implements ILinkedList{
 	public void insertAtPos(int data, int pos) {
 		ListNode newNode = new ListNode(data);
 		ListNode current = head;
+		
 		if(pos == 0 || head == null) {
 			newNode.setNext(head);
 			head = newNode;
 		}
 		
-		for(int i = 0 ; i <  pos && current.getNext() != null ; i++) {
-			if( i == pos - 1) {
-				break;
-			}
+		for(int i = 1 ; i <  pos && current.getNext() != null ; i++) {
 			current = current.getNext();
 		}
+		
 		newNode.setNext(current.getNext());
 		current.setNext(newNode);
 	}
@@ -80,7 +79,7 @@ public class SinglyLinkedList implements ILinkedList{
 		while(current != null) {
 			if(current.getData() == data) {
 				prev.setNext(current.getNext());
-			//	return;
+				return;    
 			}
 			prev = current;
 			current = current.getNext();

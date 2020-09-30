@@ -19,7 +19,7 @@ public class StackLL implements IStack {
 	}
 	
 	@Override
-	public int top() {
+	public int peek() {
 		return list.getFirst();
 	}
 	

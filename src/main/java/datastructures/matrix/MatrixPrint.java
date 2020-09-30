@@ -68,6 +68,16 @@ public class MatrixPrint {
 		}
 	}
 	
+	public static void boundaryTraversal1(int mat[][]) {
+		for(int i = 0; i < mat.length; i++) {
+			for(int j = 0; j < mat[i].length; j++) {
+				if(i == 0 || j == 0 || i == mat.length - 1 || j == mat[i].length -1) {
+					System.out.println(mat[i][j] + " ");
+				}
+			}
+		}
+		
+	}
 	
 
 }
