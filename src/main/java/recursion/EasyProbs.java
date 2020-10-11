@@ -6,7 +6,7 @@ public class EasyProbs {
 
 	public static void main(String[] args) {
 		//System.out.println(sumOfDigits(10));
-		powerSet("ABC");
+		powerSet("SAI");
 
 	}
 	

@@ -27,7 +27,7 @@ class StackLLTest {
 	void testTop() {
 		StackLL stack = new StackLL();
 		stack.push(3);
-		int top = stack.top();
+		int top = stack.peek();
 		assertEquals(3, top);
 	}
 
