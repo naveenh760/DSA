@@ -1,5 +1,7 @@
 package datastructures.arrays;
 
+import java.util.HashSet;
+
 public class ArrayProbs {
 
 	public static void main(String[] args) {
@@ -116,5 +118,23 @@ public class ArrayProbs {
 	            arr[i] = arr[i] / n;
 	        }
 	    }
+	 
+	 public int[] repeatedNumber(final int[] A) {
+		 HashSet<Integer> set = new HashSet<Integer>();
+		 int[] ans = new int[2];
+	     for(int num: A) {
+	    	 if(set.contains(num)) {
+	    		 ans[0] = num;
+	    	 }
+	     }
+	     for(int i = 1; i <= A.length; i++) {
+	    	 if(!set.contains(i)) {
+	    		 ans[1] = i;
+	    	 }
+	     }
+	     return ans;   
+	    }
+	 
+	 
 
 }

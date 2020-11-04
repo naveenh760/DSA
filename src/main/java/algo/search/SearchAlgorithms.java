@@ -176,4 +176,51 @@ public class SearchAlgorithms {
 			return arr[maxPos + 1];
 		}
 	}
+	
+	
+	public static int findMinPivot(int arr[]) {
+		int n = arr.length - 1;
+		int minPivotPos = -1;
+		int start = 0;
+		int end = n - 1;
+		while(start <= end) {
+			int mid = start + (end -start)/2;
+			if(arr[mid] > arr[n-1]) {
+				start = mid + 1;
+			}
+			else if(arr[mid] <= arr[n-1]) {
+				minPivotPos = mid;
+				end = mid - 1;
+			}
+		}
+		return minPivotPos;
+	}
+	
+	public static int searchRotatedSorted1(int A[], int  B) {
+		int n = A.length;
+		int minPivotPos = findMinPivot(A);
+		if(B <= A[n - 1]) {
+			return binarySearch(A, B, minPivotPos, n - 1);
+		}
+		else {
+			return binarySearch(A, B, 0, minPivotPos -1);
+		}
+	}
+	
+	public static int binarySearch(int arr[], int B, int start, int end){
+	    int pos = -1;
+	    while(start <= end){
+	        int mid = start + (end - start)/2;
+	        if(arr[mid] == B){
+	            return mid;
+	        }
+	        else if(arr[mid] > B){
+	            end = mid - 1;
+	        }
+	        else{
+	            start = mid + 1;
+	        }
+	    }
+	    return pos;
+	}
 }

@@ -119,4 +119,24 @@ public class MatrixOps {
 		return C;
 	}
 	
+	
+	public int searchSorted(int[][] A, int B) {
+        int R = A.length;
+        int C = A[0].length;
+        int r = 0;
+        int c = C - 1;
+        while(r < R & c >= 0){
+            if(A[r][c] == B){
+                return (r + 1)*1009 + (c + 1);
+            }
+            else if(A[r][c] < B){
+                r++;
+            }
+            else if(A[r][c] > B){
+                c--;
+            }
+        }
+        return -1;
+    }
+	
 }

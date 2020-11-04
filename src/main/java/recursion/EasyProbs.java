@@ -1,13 +1,16 @@
 package recursion;
 
-import java.util.ArrayList;
-
 public class EasyProbs {
 
 	public static void main(String[] args) {
 		//System.out.println(sumOfDigits(10));
-		powerSet("SAI");
-
+		Integer a = new Integer(1);
+		test(a);
+		System.out.println(a);
+	}
+	
+	public static void test(Integer a) {
+		a = a + 1;
 	}
 	
 	public static int sumOfDigits(int n) {
@@ -39,23 +42,7 @@ public class EasyProbs {
 		}
 		return res + 1;
 	}
-	
-	
-	public static void powerSet(String input, int index, String current) {
-		if(index == input.length()) {
-			System.out.print(current + " ");
-			return;
-		}
 		
-		powerSet(input, index + 1, current + input.charAt(index));
-		powerSet(input, index + 1, current);
-	}
-
-	public static void powerSet(String input) {
-		powerSet(input, 0, "");
-	}
-	
-	
 	public static void reverseArray(int arr[], int start, int end) {
 		if( start >= end) {
 			return;
