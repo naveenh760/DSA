@@ -116,6 +116,34 @@ public class BTree {
 			}
 		}
 	}
+	
+	
+	public ArrayList<ArrayList<Integer>> levelOrderLineByLineList() {
+		if (root == null) {
+			return null;
+		}
+		ArrayList<ArrayList<Integer>> ans = new ArrayList<ArrayList<Integer>>();
+		ans.add(new ArrayList<Integer>());
+		Queue<TreeNode> que = new LinkedList<TreeNode>();
+		que.add(root);
+		que.add(null);
+		while (que.size() > 1) {
+			TreeNode current = que.poll();
+			if (current == null) {
+				ans.add(new ArrayList<Integer>());
+				que.add(null);
+				continue;
+			}
+			ans.get(ans.size() - 1).add(current.getData());
+			if (current.getLeft() != null) {
+				que.add(current.getLeft());
+			}
+			if (current.getRight() != null) {
+				que.add(current.getRight());
+			}
+		}
+		return ans;
+	}
 
 	public void levelOrderLineByLine1() {
 		if (root == null) {

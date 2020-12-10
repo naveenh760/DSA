@@ -2,12 +2,14 @@ package algo.sorting;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Problems {
 
 	public static void main(String[] args) {
-		int a[] = {1, 6,7,7,9,13};
-		int b[] = {2 , 4, 4, 6,15,17,19};
+		int a[] = { 1, 6, 7, 7, 9, 13 };
+		int b[] = { 2, 4, 4, 6, 15, 17, 19 };
 		Integer[] result = intersectionOfSortedArrays1(a, b);
 		System.out.println(Arrays.toString(result));
 
@@ -17,14 +19,14 @@ public class Problems {
 		ArrayList<Integer> list = new ArrayList<Integer>();
 		int m = a.length;
 		int n = b.length;
-		
-		for(int i = 0 ; i < m; i++) {
-			if( i > 0 && a[i] == a[i - 1]) {
+
+		for (int i = 0; i < m; i++) {
+			if (i > 0 && a[i] == a[i - 1]) {
 				continue;
 			}
-			
-			for(int j = 0; j < n; j++) {
-				if(a[i] == b[j]) {
+
+			for (int j = 0; j < n; j++) {
+				if (a[i] == b[j]) {
 					list.add(a[i]);
 					break;
 				}
@@ -32,25 +34,23 @@ public class Problems {
 		}
 		return list.toArray(new Integer[0]);
 	}
-	
+
 	public static Integer[] intersectionOfSortedArrays1(int a[], int b[]) {
 		ArrayList<Integer> list = new ArrayList<Integer>();
 		int m = a.length;
 		int n = b.length;
 		int i = 0, j = 0;
-		
-		while(i < m && j < n) {
-			if( i > 0 && a[i] == a[i - 1]) {
+
+		while (i < m && j < n) {
+			if (i > 0 && a[i] == a[i - 1]) {
 				i++;
 				continue;
 			}
-			if(a[i] < b[j]) {
+			if (a[i] < b[j]) {
 				i++;
-			}
-			else if(a[i] > b[j]) {
+			} else if (a[i] > b[j]) {
 				j++;
-			}
-			else {
+			} else {
 				list.add(a[i]);
 				i++;
 				j++;
@@ -58,53 +58,162 @@ public class Problems {
 		}
 		return list.toArray(new Integer[0]);
 	}
-	
-	
+
 	public static Integer[] unionOfSortedArrays(int a[], int b[]) {
 		int m = a.length;
 		int n = b.length;
 		int i = 0, j = 0;
 		ArrayList<Integer> list = new ArrayList<Integer>();
-		while( i < m && j < n) {
-			if(i != 0 && a[i] == a[i - 1]) {
+		while (i < m && j < n) {
+			if (i != 0 && a[i] == a[i - 1]) {
 				i++;
 				continue;
 			}
-			
-			if( j!= 0 && b[j] == b[j - 1]) {
+
+			if (j != 0 && b[j] == b[j - 1]) {
 				j++;
 				continue;
 			}
-			
-			if(a[i] < b[j]) {
+
+			if (a[i] < b[j]) {
 				list.add(a[i]);
 				i++;
-			}
-			else if( a[i] > b[j]) {
+			} else if (a[i] > b[j]) {
 				list.add(b[j]);
 				j++;
-			}
-			else {
+			} else {
 				list.add(a[i]);
 				i++;
 				j++;
 			}
 		}
-		
-		while(i < m) {
-			if( i == 0 || a[i] != a[ i - 1]) {
+
+		while (i < m) {
+			if (i == 0 || a[i] != a[i - 1]) {
 				list.add(a[i]);
 				i++;
 			}
 		}
-		
-		while( j < n) {
-			if( j == 0 || b[j] != b[j - 1]) {
+
+		while (j < n) {
+			if (j == 0 || b[j] != b[j - 1]) {
 				list.add(b[j]);
 				j++;
 			}
 		}
 		return list.toArray(new Integer[0]);
 	}
+
+	int getInversionCount(int arr[], int start, int end) {
+		int c = 0;
+		if (start < end) {
+			int mid = (start + end) / 2;
+			c = c + getInversionCount(arr, start, mid);
+			c = c + getInversionCount(arr, mid + 1, end);
+			c = c + merge(arr, start, mid, end);
+		}
+		return c;
+	}
+
+	private int merge(int[] arr, int start, int mid, int end) {
+		int c = 0;
+		int temp[] = new int[end - start + 1];
+		int i = start, j = mid + 1, k = 0;
+
+		while (i <= mid && j <= end) {
+			if (arr[i] <= arr[j]) {
+				temp[k] = arr[i];
+				i++;
+				k++;
+			} else {
+				temp[k] = arr[j];
+				c = c + (mid + 1 - i);
+				j++;
+				k++;
+			}
+		}
+
+		while (i <= mid) {
+			temp[k] = arr[i];
+			i++;
+			k++;
+		}
+		while (j <= end) {
+			temp[k] = arr[j];
+			k++;
+			j++;
+		}
+		for (i = start; i <= end; i++) {
+			arr[i] = temp[i - start];
+		}
+		return c;
+	}
+
+	public void sort(int arr[]) {
+		getInversionCount(arr, 0, arr.length - 1);
+	}
+
+	public int[] subUnsort(int[] A) {
+		int n = A.length;
+		int noans[] = {-1};
+		int ans[] = new int[2];
+		int[] unSorted = Arrays.copyOf(A, n);
+		Arrays.sort(A);
+		int firstIndex = - 1;
+		int lastIndex = n;
+		for(int i = 0; i < n; i++) {
+			if(unSorted[i] != A[i]) {
+				firstIndex = i;
+				break;
+			}
+		}
+		if(firstIndex == -1) {
+			return noans;
+		}
+		
+		for(int i = n - 1; i >= 0; i--) {
+			if(unSorted[i] != A[i]) {
+				lastIndex = i;
+				break;
+			}
+		}
+		ans[0] = firstIndex;
+		ans[1] = lastIndex;
+        return ans;
+	}
 	
+	public int reversePair(int[] A) {
+        int n = A.length;
+        int mod = (int) (Math.pow(10,9)) + 7;
+        int cnt = 0;
+        for(int i = 0; i < n; i++){
+            for(int j = i + 1; j < n; j++){
+                if(A[i] > 2 * A[j]){
+                    cnt++;
+                }
+            }
+        }
+        return cnt % mod;
+    }
+	
+	public int consecutiveElements(int[] A) {
+		int n = A.length;
+		int min = Integer.MAX_VALUE;
+		int max = Integer.MIN_VALUE;
+		Set<Integer> hashset = new HashSet<Integer>();
+		for(int i = 0; i < n; i++) {
+			hashset.add(A[i]);
+		}
+		for(int i = 0; i < n; i++) {
+			min = Math.min(min, A[i]);
+			max = Math.max(max, A[i]);
+		}
+		for(int i = min; i <= max; i++) {
+			if(!hashset.contains(i)) {
+				return 0;
+			}
+		}
+		return 1;
+    }
+
 }

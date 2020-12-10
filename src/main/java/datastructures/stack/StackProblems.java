@@ -60,7 +60,7 @@ public class StackProblems {
 		Arrays.fill(result, 0);
 		Stack<Character> stack = new Stack<Character>();
 		int length = A.length();
-		
+
 		for (int i = 0; i < length; i++) {
 			Character ch = A.charAt(i);
 			if (ch == '(') {
@@ -170,6 +170,21 @@ public class StackProblems {
 			stack.push(arr[i]);
 		}
 		return result;
+	}
+
+	public int passingGame(int A, int B, int[] C) {
+		Stack<Integer> stack = new Stack<Integer>();
+		stack.push(B);
+		for(int num: C) {
+			if(num > 0) {
+				stack.push(num);
+			}
+			else {
+				stack.pop();
+			}
+		}
+		
+		return stack.peek();
 	}
 
 }

@@ -3,7 +3,7 @@ package algo.search;
 public class Problems {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		System.out.println(athMagical1(807414236, 3788, 38141));
 
 	}
 
@@ -93,6 +93,24 @@ public class Problems {
     }
 	
 	
+	public int searchInsert(int[] A, int B) {
+        int n = A.length;
+        int ans = n;
+        int start = 0;
+        int end = n - 1;
+        while( start <= end){
+            int mid = start + (end - start)/2;
+            if(A[mid] < B){
+                start = mid + 1;
+            }
+            else if(A[mid] >= B){
+                ans = mid;
+                end = mid - 1;
+            }
+        }
+        return ans;
+    }
+	
 	public int searchMatrix(int[][] A, int B) {
         int R = A.length;
         int C = A[0].length;
@@ -149,6 +167,52 @@ public class Problems {
 			
 		}
 		return 0;
+	}
+	
+	
+	public int athMagical(int A, int B, int C) {
+        int mod = (int) (Math.pow(10,9)) + 7;
+        int num = 2;
+        int count = 0;
+        while(true){
+            if((num % B == 0) || (num % C == 0)){
+                count++;
+                if(count == A){
+                    break;
+                }
+            }
+            num++;
+        }
+        return num % mod;
+    }
+	
+		
+	public static int athMagical1(int A, int B, int C) {
+		long ans = 0;
+        int mod = (int) (Math.pow(10,9)) + 7;
+        long low = 1L;
+        long high = (long)A * (long)Math.max(B, C);
+        long lcm = (B * C) / gcd(B,C);
+        while(low <= high) {
+        	long mid =  (low + (high - low) / 2);
+        	long count = (mid / B) + (mid / C) - (mid / lcm);
+        	if(count >= A) {
+        		ans = mid;
+        		high = mid - 1;
+        	}
+        	else {
+        		low = mid + 1;
+        	}
+        }
+        return (int) (ans % mod);
+    }
+	
+		
+	static int gcd(int A, int B) {
+		if(A == 0) {
+			return B;
+		}
+		return gcd(B % A, A);
 	}
 
 }

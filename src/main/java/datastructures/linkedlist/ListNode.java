@@ -2,8 +2,8 @@ package datastructures.linkedlist;
 
 public class ListNode {
 
-	private int data;
-	private ListNode next;
+	public int data;
+	public ListNode next;
 	
 	public int getData() {
 		return data;

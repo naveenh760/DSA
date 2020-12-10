@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
 
 public class ArrayProbs {
 
@@ -286,5 +287,31 @@ public class ArrayProbs {
 		}
 		return count;
 	}
+	
+	public int longestConsecutive(final int[] A) {
+		Set<Integer> set = new HashSet<Integer>();
+		for(int num: A) {
+			set.add(num);
+		}
+		
+		int maxLen = 0;
+		for(int num: A) {
+			if(!set.contains(num - 1)) {
+				int curLen = 1;
+				while(true) {
+					if(set.contains(num + 1)) {
+						curLen++;
+						num++;
+					}
+					else {
+						break;
+					}
+				}
+				maxLen = Math.max(maxLen, curLen);
+			}
+			
+		}
+		return maxLen;
+    }
 
 }

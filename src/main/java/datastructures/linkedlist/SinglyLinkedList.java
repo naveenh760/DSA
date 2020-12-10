@@ -12,6 +12,14 @@ public class SinglyLinkedList implements ILinkedList{
 		this.head = head;
 	}
 	
+	public SinglyLinkedList() {
+		this.head = null;
+	}
+	
+	public SinglyLinkedList(ListNode head) {
+		this.head = head;
+	}
+	
 	@Override
 	public int size() {
 		int size = 0;

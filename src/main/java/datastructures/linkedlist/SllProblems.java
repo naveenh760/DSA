@@ -187,5 +187,41 @@ public class SllProblems extends SinglyLinkedList{
 			return false;
 		}
 	}
+	
+	public ListNode mergeTwoLists(ListNode A, ListNode B) {
+        if(A == null){
+            return B;
+        }
+        if(B == null){
+            return A;
+        }
+        ListNode head = new ListNode(0);  
+        ListNode tail = head;
+        while(A != null && B!= null){
+            if(A.data < B.data){
+                tail.next = A;
+                tail = tail.next;
+                A = A.next;
+            }
+            else{
+                tail.next = B;
+                tail = tail.next;
+                B = B.next;
+            }
+        }
+        
+        while(A != null){
+            tail.next = A;
+            tail = tail.next;
+            A = A.next;
+        }
+        while(B != null){
+            tail.next = B;
+            tail = tail.next;
+            B = B.next;
+        }
+        return head.next;
+        
+    }
 
 }
