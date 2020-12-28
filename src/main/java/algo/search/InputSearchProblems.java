@@ -1,34 +1,12 @@
 package algo.search;
 
-public class Problems {
+public class InputSearchProblems {
 
 	public static void main(String[] args) {
-		System.out.println(athMagical1(807414236, 3788, 38141));
+		// TODO Auto-generated method stub
 
 	}
-
-	long floorSqrt(long x) {
-		long low = 0;
-		long high = x;
-		if (x == 0) {
-			return 0;
-		}
-		if (x == 1) {
-			return 1;
-		}
-		while (low <= high) {
-			long mid = low + (high - low) / 2;
-			if (x / mid == mid) {
-				return mid;
-			} else if (x / mid < mid) {
-				high = mid - 1;
-			} else {
-				low = mid + 1;
-			}
-		}
-		return high;
-	}
-
+	
 	public int peakElement(int[] arr) {
 		int peakPos = 0;
 		int n = arr.length;
@@ -169,50 +147,5 @@ public class Problems {
 		return 0;
 	}
 	
-	
-	public int athMagical(int A, int B, int C) {
-        int mod = (int) (Math.pow(10,9)) + 7;
-        int num = 2;
-        int count = 0;
-        while(true){
-            if((num % B == 0) || (num % C == 0)){
-                count++;
-                if(count == A){
-                    break;
-                }
-            }
-            num++;
-        }
-        return num % mod;
-    }
-	
-		
-	public static int athMagical1(int A, int B, int C) {
-		long ans = 0;
-        int mod = (int) (Math.pow(10,9)) + 7;
-        long low = 1L;
-        long high = (long)A * (long)Math.max(B, C);
-        long lcm = (B * C) / gcd(B,C);
-        while(low <= high) {
-        	long mid =  (low + (high - low) / 2);
-        	long count = (mid / B) + (mid / C) - (mid / lcm);
-        	if(count >= A) {
-        		ans = mid;
-        		high = mid - 1;
-        	}
-        	else {
-        		low = mid + 1;
-        	}
-        }
-        return (int) (ans % mod);
-    }
-	
-		
-	static int gcd(int A, int B) {
-		if(A == 0) {
-			return B;
-		}
-		return gcd(B % A, A);
-	}
 
 }

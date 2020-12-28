@@ -1,4 +1,4 @@
-package solvingmethods.backtrack;
+package recursion.backtrack;
 
 /* Java program to solve Rat in 
 a Maze problem using backtracking */
