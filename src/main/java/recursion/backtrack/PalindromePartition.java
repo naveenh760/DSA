@@ -16,18 +16,18 @@ public class PalindromePartition {
 		partition(0,a,current, ans);
 		return ans;
 	}
-	
+		
 	static void partition(int start, String s, ArrayList<String> current, ArrayList<ArrayList<String>> ans) {
 		int n = s.length();
 		if(start == n) {
-		   ans.add(current);
+		   ans.add(new ArrayList<String>(current));
 		   return;
 		}
 		for(int j = start; j < n; j++) {
 			if(isPalindrome(s, start, j)) {
-				ArrayList<String> current1 = new ArrayList<String>(current);
-				current1.add(s.substring(start, j + 1));
-				partition(j + 1, s, current1, ans);
+				current.add(s.substring(start, j + 1));
+				partition(j + 1, s, current, ans);
+				current.remove(current.size() - 1);
 			}
 		}
 		

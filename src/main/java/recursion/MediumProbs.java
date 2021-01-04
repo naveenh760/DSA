@@ -8,10 +8,17 @@ public class MediumProbs {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		System.out.println(letterCombinations("231"));
+		letterPhone("231");
 
 	}
 	
 	public static ArrayList<String> letterCombinations(String A) {
+		HashMap<Character, String> map = populateMap();
+		ArrayList<String> ans = letterCombinations(A, map);
+		return ans;
+	}
+
+	static HashMap<Character, String> populateMap() {
 		HashMap<Character, String> map = new HashMap<Character, String>();
 		map.put('0',"0");
 		map.put('1',"1");
@@ -23,8 +30,7 @@ public class MediumProbs {
 		map.put('7', "pqrs");
 		map.put('8', "tuv");
 		map.put('9', "wxyz");
-		ArrayList<String> ans = letterCombinations(A, map);
-		return ans;
+		return map;
 	}
 
 	
@@ -56,6 +62,27 @@ public class MediumProbs {
 		}
 
 		return ans;
+	}
+	
+	
+	public static void letterPhone(String A) {
+		HashMap<Character, String> map = populateMap();
+		ArrayList<String> ans = new ArrayList<String>();
+		letterPhone(A, "", map, 0,ans);
+		System.out.println(ans);
+	}
+	
+	
+	public static void letterPhone(String A, String current, HashMap<Character, String> map, int index, ArrayList<String> ans) {
+		if(index == A.length()) {
+			ans.add(current);
+			return;
+		}
+		char curChar = A.charAt(index);
+		String curMapping = map.get(curChar);
+		for(int i = 0; i < curMapping.length(); i++) {
+			letterPhone(A, current + curMapping.charAt(i), map, index + 1, ans);
+		}
 	}
 
 

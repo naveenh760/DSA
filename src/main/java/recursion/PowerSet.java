@@ -11,11 +11,11 @@ public class PowerSet {
 	public static void main(String[] args) {
 		// powerSet("SAI");
 		ArrayList<Integer> arr = new ArrayList<Integer>();
-		for (int i = 1; i <= 3; i++) {
+		for (int i = 1; i <= 2; i++) {
 			arr.add(i);
 		}
 		arr.add(1);
-//		powerSet(arr);
+//	powerSet(arr);
 		powerSetDup(arr);
 	//	System.out.println(sixlet(arr, 2));
 
@@ -48,14 +48,30 @@ public class PowerSet {
 		powerSet(arr, index + 1, curInclude);
 
 	}
+	
+	public static void powerSet1(ArrayList<Integer> arr, int index, ArrayList<Integer> current, ArrayList<ArrayList<Integer>> ans) {
+		if (index == arr.size()) {
+			ans.add(new ArrayList<Integer>(current));
+			return;
+		}
+		powerSet1(arr, index + 1, current,ans);
+		current.add(arr.get(index));
+		powerSet1(arr, index + 1, current, ans);
+		current.remove(current.size() - 1);
+	}
 
 	public static void powerSet(ArrayList<Integer> arr) {
-		powerSet(arr, 0, new ArrayList<Integer>());
+		ArrayList<ArrayList<Integer>> ans = new ArrayList<ArrayList<Integer>>();
+		powerSet1(arr, 0, new ArrayList<Integer>(), ans);
+		System.out.println(ans);
+		
 	}
 		
 	public static void powerSetDup(ArrayList<Integer> arr) {
+		ArrayList<ArrayList<Integer>> ans = new ArrayList<ArrayList<Integer>>();
 		ArrayList<ArrayList<Integer>> freqArr = getFrequency(arr);
-		powerSetDup(freqArr, 0, new ArrayList<Integer>());
+		powerSetDup(freqArr, 0, new ArrayList<Integer>() , ans);
+		System.out.println(ans);
 		
 	}
 
@@ -80,18 +96,18 @@ public class PowerSet {
 		return freqArr;
 	}
 
-	private static void powerSetDup(ArrayList<ArrayList<Integer>> freqArr, int index, ArrayList<Integer> current) {
+	private static void powerSetDup(ArrayList<ArrayList<Integer>> freqArr, int index, ArrayList<Integer> current, ArrayList<ArrayList<Integer>> ans) {
 		if(index == freqArr.size()) {
-			System.out.println(current);
+			ans.add(new ArrayList<Integer>(current));
 			return;
 		}
 		int key = freqArr.get(index).get(0);
 		int freq = freqArr.get(index).get(1);
-		for(int i = freq; i >= 0; i--) {
+		for(int i = 0; i <= freq; i++) {
 			for(int j = 0; j < i; j++) {
 				current.add(key);
 			}
-			powerSetDup(freqArr,index + 1,current);
+			powerSetDup(freqArr,index + 1,current, ans);
 			for(int j = 0; j < i; j++) {
 				int ind = current.size() - 1;
 				current.remove(ind);
