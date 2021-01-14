@@ -1,4 +1,4 @@
-package datastructures.algo.sorting;
+package algo.sorting;
 
 import static org.junit.jupiter.api.Assertions.*;
 

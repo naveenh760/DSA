@@ -1,4 +1,4 @@
-package algo.sorting;
+package algo.sorting.problems;
 
 import java.util.ArrayList;
 import java.util.Arrays;

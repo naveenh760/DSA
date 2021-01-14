@@ -1,18 +1,18 @@
-package datastructures.algo.sorting;
+package algo.sorting;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import algo.sorting.InsertionSort;
+import algo.sorting.SelectionSort;
 
-class InsertionSortTest {
+class SelectionSortTest {
 
 	@Test
-	void testSort() {
+	void test() {
 		int input[] = {5,4,3,1,2};
 		int expected[] = {1,2,3,4,5};
-		InsertionSort obj = new InsertionSort();
+		SelectionSort obj = new SelectionSort();
 		obj.sort(input);
 		int actual[] = input;
 		assertArrayEquals(expected, actual);

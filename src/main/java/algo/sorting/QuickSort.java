@@ -16,17 +16,19 @@ public class QuickSort {
 		
 		for(int j= low; j < high; j++) {
 			if(arr[j] <= pivot) {
-				int temp = arr[pIndex];
-				arr[pIndex] = arr[j];
-				arr[j] = temp;
+				swap(arr, pIndex, j);
 				pIndex++;
 			}
 		}
 		
-		int temp = arr[pIndex];
-		arr[pIndex] = arr[high];
-		arr[high] = temp;
+		swap(arr, pIndex, high);
 		return pIndex;
+	}
+
+	void swap(int[] arr, int i, int j) {
+		int temp = arr[i];
+		arr[i] = arr[j];
+		arr[j] = temp;
 	}
 	
 	public void quicksortL(int arr[]) {
@@ -77,9 +79,7 @@ public class QuickSort {
 				return j;
 			}
 			
-			int temp = arr[i];
-			arr[i] = arr[j];
-			arr[j] = temp;
+			swap(arr, i, j);
 		}
 	}
 	

@@ -1,4 +1,4 @@
-package algo.sorting;
+package algo.sorting.problems;
 
 public class ReversePairs {
 
@@ -6,6 +6,21 @@ public class ReversePairs {
 		int[] arr = { 1, 3, 2, 3, 1 };
 		System.out.println(getReversePairs(arr, 0, 4));
 
+	}
+	
+	
+	public int reversePair(int[] A) {
+		int n = A.length;
+		int mod = (int) (Math.pow(10, 9)) + 7;
+		int cnt = 0;
+		for (int i = 0; i < n; i++) {
+			for (int j = i + 1; j < n; j++) {
+				if (A[i] > 2 * A[j]) {
+					cnt++;
+				}
+			}
+		}
+		return cnt % mod;
 	}
 
 	static int getReversePairs(int arr[], int start, int end) {
