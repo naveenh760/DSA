@@ -1,5 +1,7 @@
 package datastructures.trees;
 
+import datastructures.trees.bst.BSTree;
+
 public class TreeDemo {
 
 	public static void main(String[] args) {
@@ -18,7 +20,6 @@ public class TreeDemo {
 		tree.insert(3);
 		tree.insert(4);
 		tree.insert(1);
-		tree.preorder();
 	}
 	
 	public static void BSTreeExample1() {
@@ -26,7 +27,6 @@ public class TreeDemo {
 		tree.insertIter(3);
 		tree.insertIter(4);
 		tree.insertIter(1);
-		tree.preorder();
 	}
 
 }

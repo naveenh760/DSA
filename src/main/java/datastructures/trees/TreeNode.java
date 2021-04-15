@@ -2,15 +2,15 @@ package datastructures.trees;
 
 public class TreeNode {
  
-	private int data;
-	private TreeNode left;
-	private TreeNode right;
+	public int val;
+	public TreeNode left;
+	public TreeNode right;
 	
 	public int getData() {
-		return data;
+		return val;
 	}
 	public void setData(int data) {
-		this.data = data;
+		this.val = data;
 	}
 	public TreeNode getLeft() {
 		return left;
@@ -26,7 +26,7 @@ public class TreeNode {
 	}
 	
 	public TreeNode(int data) {
-		this.data = data;
+		this.val = data;
 		this.left = null;
 		this.right = null;
 	}

@@ -1,23 +1,10 @@
-package datastructures.trees;
+package datastructures.trees.bst;
 
-import java.util.ArrayList;
-import java.util.List;
+import datastructures.trees.TreeNode;
+import datastructures.trees.TreeProperties;
 
 public class BSTree {
 	private TreeNode root;
-	public List<Integer> contents = new ArrayList<Integer>();
-
-	public Integer[] getContentsInOrder() {
-		clearContents();
-		inorder();
-		Integer[] array = new Integer[contents.size()];
-		System.arraycopy(contents.toArray(), 0, array, 0, contents.size());
-		return array;
-	}
-
-	public void clearContents() {
-		contents.clear();
-	}
 
 	public TreeNode getRoot() {
 		return root;
@@ -33,44 +20,6 @@ public class BSTree {
 
 	public BSTree() {
 		this(null);
-	}
-
-	public void preorder() {
-		preorder(root);
-	}
-
-	public void inorder() {
-		inorder(root);
-	}
-
-	public void postorder() {
-		postorder(root);
-	}
-
-	private void preorder(TreeNode root) {
-		if (root != null) {
-			System.out.print(root.getData() + " ");
-			preorder(root.getLeft());
-			preorder(root.getRight());
-		}
-	}
-
-	private void inorder(TreeNode root) {
-		if (root != null) {
-			inorder(root.getLeft());
-			contents.add(root.getData());
-			// System.out.print(root.getData() + " ");
-			inorder(root.getRight());
-		}
-	}
-
-	private void postorder(TreeNode root) {
-		if (root != null) {
-			postorder(root.getLeft());
-			postorder(root.getRight());
-			System.out.print(root.getData() + " ");
-
-		}
 	}
 
 	private TreeNode insertRec(TreeNode root, int data) {
@@ -214,19 +163,7 @@ public class BSTree {
 		return findMax().getData();
 	}
 
-	public int height(TreeNode root) {
-		if (root == null) {
-			return 0;
-		} else {
-			int lHeight = height(root.getLeft());
-			int rHeight = height(root.getRight());
-			return Math.max(lHeight, rHeight) + 1; // add 1 for height of root
-		}
-	}
-
-	public int height() {
-		return height(root);
-	}
+	
 
 	public void printGivenLevel(TreeNode root, int level) {
 		if (root == null) {
@@ -242,7 +179,7 @@ public class BSTree {
 	}
 
 	public void printLevelOrder(TreeNode root) {
-		int h = height(root);
+		int h = TreeProperties.height(root);
 		for (int i = 1; i <= h; i++) {
 			printGivenLevel(root, i);
 		}

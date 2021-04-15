@@ -29,6 +29,21 @@ public class Kadane {
 	}
 	
 	
+	public static int maxSubArraySumK1(int arr[]) {
+		int n = arr.length;
+		int max = Integer.MIN_VALUE;
+		int currSum = 0;
+		for(int i = 0; i < n; i++) {
+			currSum = currSum + arr[i];
+			max = Math.max(max, currSum);
+			if(currSum < 0) {
+				currSum = 0;
+			}
+		}
+		return max;
+	}
+	
+	
 	public static int maxEvenOdd(int arr[]) {
 		int n = arr.length;
 		int res = 1;

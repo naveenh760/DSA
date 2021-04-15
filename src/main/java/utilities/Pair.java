@@ -17,7 +17,7 @@ public class Pair implements Comparable<Pair> {
 	@Override
 	public boolean equals(Object obj) {
 		Pair p = (Pair) obj;
-		return (p.x == x && p.y == y);
+		return (p.x == x && p.y == y) || (p.x == y && p.y == x);
 	}
 
 	@Override
