@@ -10,19 +10,19 @@ public class LIS {
 
 	}
 
-	long longestIncSubsequence(int arr[]) {
+	int longestIncSubsequence(int arr[]) {
 		int n = arr.length;
-		long lcs[] = new long[n];
-		lcs[0] = 1;
+		int llis[] = new int[n];
+		llis[0] = 1;
 		for(int i = 1; i < n;i++) {
-			lcs[i] = 1;
+			llis[i] = 1;
 			for(int j = 0; j < i; j++) {
 				if(arr[j] < arr[i]) {
-					lcs[i] = Math.max(lcs[i], lcs[j] + 1);
+					llis[i] = Math.max(llis[i], llis[j] + 1);
 				}
 			}
 		}
-       return Arrays.stream(lcs).max().getAsLong();
+       return Arrays.stream(llis).max().getAsInt();
 	}
 	
 	

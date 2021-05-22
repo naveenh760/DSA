@@ -1,4 +1,4 @@
-package solvingmethods.dp;
+package solvingmethods.dp.dp1;
 
 import java.util.Arrays;
 
