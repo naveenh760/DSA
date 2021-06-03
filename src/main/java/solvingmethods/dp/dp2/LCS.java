@@ -1,11 +1,10 @@
-package solvingmethods.dp;
+package solvingmethods.dp.dp2;
 
 import java.util.Arrays;
 
 public class LCS {
 
-	private static int lcsRec(String s1, String s2, int m, int n) {
-
+	public static int lcsRec(String s1, String s2, int m, int n) {
 		if (m == 0 || n == 0) {
 			return 0;
 		} else if (s1.charAt(m - 1) == s2.charAt(n - 1)) {
@@ -26,7 +25,7 @@ public class LCS {
 		return lcsMemo(s1, s2, m, n, lookup);
 	}
 
-	private static int lcsMemo(String s1, String s2, int m, int n, int[][] lookup) {
+	public static int lcsMemo(String s1, String s2, int m, int n, int[][] lookup) {
 		if (lookup[m][n] == -1) {
 			if (m == 0 || n == 0) {
 				lookup[m][n] = 0;
@@ -41,22 +40,17 @@ public class LCS {
 	}
 	
 	
-	private static int lcsTab(String s1, String s2) {
+	public static int lcsTab(String s1, String s2) {
 		int m = s1.length();
 		int n = s2.length();
 		int lookup[][] = new int[m + 1][n + 1];
-		//Initialize first column to zero
-		for(int i = 0; i <= m; i++) {
-			lookup[i][0] = 0;
-		}
-		//Initialize first row to zero
-		for(int j = 0; j <= n; j++) {
-			lookup[0][j] = 0;
-		}
 		
-		for(int i = 1; i <= m; i++) {
-			for(int j = 1; j <= n; j++) {
-				if(s1.charAt(i - 1) == s2.charAt(j - 1)) {
+		for(int i = 0; i <= m; i++) {
+			for(int j = 0; j <= n; j++) {
+				if(i == 0 || j == 0) {
+					lookup[i][j] = 0;
+				}
+				else if(s1.charAt(i - 1) == s2.charAt(j - 1)) {
 					lookup[i][j] = 1 + lookup[i - 1][j - 1];
 				}
 				else {

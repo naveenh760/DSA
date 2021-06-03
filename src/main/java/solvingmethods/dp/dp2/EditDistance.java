@@ -1,4 +1,4 @@
-package solvingmethods.dp;
+package solvingmethods.dp.dp2;
 
 import java.util.Arrays;
 
@@ -18,7 +18,7 @@ public class EditDistance {
 		}
 		else {
 			return 1 + Math.min(editDistRec(s1, s2, m, n-1),
-					            Math.min(editDistRec(s1, s2, m, n-1), 
+					            Math.min(editDistRec(s1, s2, m - 1, n), 
 					            		  editDistRec(s1, s2, m-1, n-1))
 					  );
 		}
@@ -46,32 +46,32 @@ public class EditDistance {
 			}
 			
 			else if(s1.charAt(m - 1) == s2.charAt(n - 1)) {
-				lookup[m][n] =  editDistRec(s1, s2, m-1, n-1);
+				lookup[m][n] =  editDistanceMemo(s1, s2, m-1, n-1, lookup);
 			}
 			else {
-				lookup[m][n] =  1 + Math.min(editDistRec(s1, s2, m, n-1),
-						            Math.min(editDistRec(s1, s2, m, n-1), 
-						            		  editDistRec(s1, s2, m-1, n-1))
+				lookup[m][n] =  1 + Math.min(editDistanceMemo(s1, s2, m, n-1,lookup),
+						            Math.min(editDistanceMemo(s1, s2, m -1, n,lookup), 
+						            		editDistanceMemo(s1, s2, m-1, n-1,lookup))
 						  );
 			}
 		}
 		return lookup[m][n];
 	}
 
-    private int editDistanceTab(String s1, String s2) {
+    public int editDistanceTab(String s1, String s2) {
     	int m = s1.length();
     	int n = s2.length();
     	int lookup[][] = new int[m+1][n+1];
-    	for(int i= 0; i<= m;i++) {
-    		lookup[i][0] = i;
-    	}
-    	for(int j=0; j <= n;j++) {
-    		lookup[0][j] = j;
-    	}
     	
-    	for(int i = 1; i <= m; i++) {
-    		for(int j = 1; j <= n; j++) {
-    			if(s1.charAt(i -1) == s2.charAt(j -1)) {
+    	for(int i = 0; i <= m; i++) {
+    		for(int j = 0; j <= n; j++) {
+    			if(i == 0) {
+    				lookup[i][j] = j;
+    			}
+    			else if(j == 0) {
+    				lookup[i][j] = i;
+    			}
+    			else if(s1.charAt(i -1) == s2.charAt(j -1)) {
     				lookup[i][j] = lookup[i-1][j-1];
     			}
     			else {

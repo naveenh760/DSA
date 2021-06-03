@@ -1,4 +1,4 @@
-package solvingmethods.dp;
+package solvingmethods.dp.dp2;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -6,11 +6,15 @@ import java.util.Arrays;
 public class LIS {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+      int[] arr= {5,6,3,7,9};
+      int[] lis = longestIncSubsequence(arr);
+      for(int num: lis) {
+    	  System.out.println(num);
+      }
 
 	}
 
-	int longestIncSubsequence(int arr[]) {
+	int longestIncSubsequenceLen(int arr[]) {
 		int n = arr.length;
 		int llis[] = new int[n];
 		llis[0] = 1;
@@ -25,6 +29,44 @@ public class LIS {
        return Arrays.stream(llis).max().getAsInt();
 	}
 	
+	
+	static int[] longestIncSubsequence(int arr[]) {
+		int n = arr.length;
+		int llis[] = new int[n];
+		int prev[] = new int[n];
+		for(int i = 0; i < n; i++) {
+			prev[i] = i;
+		}
+		llis[0] = 1;
+		for(int i = 1; i < n;i++) {
+			llis[i] = 1;
+			for(int j = 0; j < i; j++) {
+				if(arr[j] < arr[i]) {
+					if(llis[j] + 1 > llis[i]) {
+						llis[i] = llis[j] + 1;
+						prev[i] = j;
+					}
+				}
+			}
+		}
+       int maxPos = -1;
+       int max = Integer.MIN_VALUE;
+       for(int i = 0; i < n; i++) {
+    	   if(llis[i] > max) {
+    		   max = llis[i];
+    		   maxPos = i;
+    	   }
+       }
+       
+       int lis[] = new int[max];
+       int curPos = maxPos;
+       for(int i = max - 1; i >= 0; i--) {
+    	   lis[i] = arr[curPos];
+    	   curPos = prev[curPos];
+       }
+       return lis;
+	}
+
 	
 	long longestIncSubsequenceBS(int arr[]) {
 		int n = arr.length;
