@@ -2,6 +2,7 @@ package datastructures.arrays;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 
 public class ArrayComp {
 
@@ -14,7 +15,7 @@ public class ArrayComp {
 		arrList.add(1);
 		arrList.add(2);
 	//	System.out.println(plusOne1(arrList));
-		int[] ans = maxset(arr2);
+		int[] ans = maxNonNegSubArray(arr2);
 		for(int num:ans) {
 			System.out.print(num + " ");
 		}
@@ -223,7 +224,7 @@ public class ArrayComp {
 		return A;
 	}
 
-	public static int[] maxset(int[] A) {
+	public static int[] maxNonNegSubArray(int[] A) {
 		int n = A.length;
 		
 		long currSum = 0;
@@ -268,5 +269,115 @@ public class ArrayComp {
 		}
 		return maxRes;
 	}
+	
+	
+	public static int[] maxNonNegSubArray1(int[] arr) {
+		int n = arr.length;
+		int start = -1, end = -2, maxSumStart = -1, maxSumEnd = -1;
+		long maxSum = Integer.MIN_VALUE;
+		long sum = 0;
+		for(int i = 0; i < n; i++) {
+			if(arr[i] >= 0) {
+				if(start == -1) {
+					start = i;
+				}
+				end = i;
+				sum = sum + arr[i];
+			}
+			else {
+				if(sum > maxSum || (sum == maxSum && (end - start + 1) > (maxSumEnd - maxSumStart + 1))) {
+					maxSum = sum;
+					maxSumStart = start;
+					maxSumEnd = end;
+				}
+				sum = 0;
+				start = -1;
+			}
+		}
+		
+		if(sum > maxSum || (sum == maxSum && (end - start + 1) > (maxSumEnd - maxSumStart + 1))) {
+			maxSum = sum;
+			maxSumStart = start;
+			maxSumEnd = end;
+		}
+		
+		int len = maxSumEnd - maxSumStart + 1;
+		int[] res = new int[len];
+		for(int i = 0; i < len; i++) {
+			res[i] = arr[maxSumStart + i];
+		}
+		return res;
+	}
+	
+	
+	public int[] repeatedNumber(final int[] A) {
+        HashSet<Integer> set = new HashSet<Integer>();
+		 int[] ans = new int[2];
+	     for(int num: A) {
+	    	 if(set.contains(num)) {
+	    		 ans[0] = num;
+	    	 }
+	    	 set.add(num);
+	     }
+	     for(int i = 1; i <= A.length; i++) {
+	    	 if(!set.contains(i)) {
+	    		 ans[1] = i;
+	    		 break;
+	    	 }
+	     }
+	     return ans;  
+        
+    }
+	
+	
+	public int[] repeatedNumber1(final int[] arr) {
+		 int[] ans = new int[2];
+		 double sumArray = 0;
+		 double sumArraySquared = 0;
+		 int n = arr.length;
+		 for(int num: arr) {
+			 sumArray += num;
+			 sumArraySquared += Math.pow(num, 2);
+		 }
+		 double sumSeries = (n * (n + 1)) / 2;
+		 double sumSeriesSquared = Math.ceil(Math.pow(n, 3) / 3 +  Math.pow(n, 2) / 2 + n / 6.0);
+		 
+		 double diffAB = 	sumArray - sumSeries;
+		 double sumAB = (sumArraySquared - sumSeriesSquared) / diffAB;
+		 
+		 double A = (diffAB + sumAB) / 2;
+		 double B = sumAB - A;
+		 
+		 ans[0] = (int)Math.ceil(A);
+		 ans[1] = (int) Math.ceil(B);
+		 
+        return ans;
+    }
+	
+	
+	public int[] repeatedNumber2(final int[] arr) {
+		 int[] ans = new int[2];
+		 long aMinusB = 0;
+		 long diffOfSumOfSquares = 0;
+		 int n = arr.length;
+		 for(int i = 0; i < n; i++ ) {
+			 long num = arr[i];
+			 long nextI = i + 1;
+			 aMinusB += arr[i];
+			 aMinusB -= (i + 1);
+			 diffOfSumOfSquares += (num * num);
+			 diffOfSumOfSquares -= (nextI * nextI);
+		 }
+		 
+		 long aPlusB = diffOfSumOfSquares / aMinusB;
+		 
+		 long A =  (aMinusB + aPlusB) / 2;
+		 long B = aPlusB - A;
+		 
+		 ans[0] = (int) A;
+		 ans[1] = (int) B;
+		 
+       return ans;
+   }
 
 }
