@@ -224,6 +224,33 @@ public class ArrayComp {
 		return A;
 	}
 
+	public ArrayList<Integer> plusOne2(ArrayList<Integer> A) {
+		if(A.size() > 1){
+			while(A.get(0) == 0){
+				A.remove(0);
+			}
+		}
+
+		int n = A.size();
+		int carry = 1;
+		for(int i = n - 1; i >= 0; i--){
+			int currSum = A.get(i) + carry;
+			if(currSum <= 9){
+				A.set(i, currSum);
+				carry = 0;
+				break;
+			}
+			else if(currSum == 10){
+				A.set(i, 0);
+				carry = 1;
+			}
+		}
+		if(carry == 1){
+			A.add(0,carry);
+		}
+		return A;
+	}
+
 	public static int[] maxNonNegSubArray(int[] A) {
 		int n = A.length;
 		

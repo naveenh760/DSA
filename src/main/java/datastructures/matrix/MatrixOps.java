@@ -119,7 +119,8 @@ public class MatrixOps {
 		return C;
 	}
 	
-	
+
+	//doesnt work in some cases
 	public int searchSorted(int[][] A, int B) {
         int R = A.length;
         int C = A[0].length;
@@ -138,5 +139,14 @@ public class MatrixOps {
         }
         return -1;
     }
+
+	public int searchSortedBrute(int[][] a, int b) {
+		int n = a.length, m = a[0].length;
+		for (int i = 0; i < n; i++)
+			for (int j = 0; j < m; j++)
+				if (a[i][j] == b)
+					return (i + 1) * 1009 + j + 1;
+		return -1;
+	}
 	
 }

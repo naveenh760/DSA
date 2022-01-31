@@ -48,5 +48,11 @@ public class TreeCompare {
 		
 		return A.val == B.val && isMirrorTreeBool(A.left, B.right) && isMirrorTreeBool(A.right, B.left);
 	}
+
+	public boolean isSymmetric(TreeNode A){
+		return isMirrorTreeBool(A,A);
+	}
+
+
 	
 }

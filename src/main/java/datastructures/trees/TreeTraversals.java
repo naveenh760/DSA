@@ -1,11 +1,6 @@
 package datastructures.trees;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Stack;
+import java.util.*;
 
 public class TreeTraversals {
 
@@ -229,6 +224,28 @@ public class TreeTraversals {
 		}
 	}
 
+	public ArrayList<ArrayList<Integer>> levelOrderToList(TreeNode root) {
+		ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
+		Queue<TreeNode> que = new LinkedList<TreeNode>();
+		que.add(root);
+		while(!que.isEmpty()){
+			int cnt = que.size();
+			ArrayList<Integer> arr = new ArrayList<Integer>();
+			result.add(arr);
+			for(int i = 0; i < cnt; i++){
+				TreeNode current = que.poll();
+				arr.add(current.val);
+				if(current.left != null){
+					que.add(current.left);
+				}
+				if(current.right != null){
+					que.add(current.right);
+				}
+			}
+		}
+		return result;
+	}
+
 	public ArrayList<ArrayList<Integer>> verticalOrderTraversal(TreeNode root) {
 		ArrayList<ArrayList<Integer>> ans = new ArrayList<ArrayList<Integer>>();
 		HashMap<Integer, ArrayList<Integer>> levelMap = new HashMap<Integer, ArrayList<Integer>>();
@@ -296,22 +313,16 @@ public class TreeTraversals {
 	
 	public ArrayList<Integer> topView(TreeNode root) {
 		ArrayList<Integer> ans = new ArrayList<Integer>();
-		HashMap<Integer, TreeNode> levelMap = new HashMap<Integer, TreeNode>();
+		TreeMap<Integer, TreeNode> levelMap = new TreeMap<Integer, TreeNode>();
 		buildTopViewMap(root, levelMap);
-		int minLevel = Integer.MAX_VALUE;
-		int maxLevel = Integer.MIN_VALUE;
-		for (int num : levelMap.keySet()) {
-			minLevel = Math.min(minLevel, num);
-			maxLevel = Math.max(maxLevel, num);
-		}
-		for (int i = minLevel; i <= maxLevel; i++) {
-			ans.add(levelMap.get(i).val);
+		for (int level:levelMap.keySet()) {
+			ans.add(levelMap.get(level).val);
 		}
 
 		return ans;
 	}
 	
-	private void buildTopViewMap(TreeNode root, HashMap<Integer, TreeNode> levelMap) {
+	private void buildTopViewMap(TreeNode root, TreeMap<Integer, TreeNode> levelMap) {
 		if (root == null) {
 			return;
 		}

@@ -78,10 +78,7 @@ public class Factors {
 			return A;
 		}
 		int ans = 1;
-		int min = A;
-		if (B < min) {
-			min = B;
-		}
+		int min = Math.min(A,B);
 		for (int f = min; f > 0; f--) {
 			if (A % f == 0 && B % f == 0) {
 				ans = f;
@@ -135,6 +132,36 @@ public class Factors {
 		 int exp =  (int) (Math.log(A) / Math.log(2));
 		 return (int) Math.pow(2, exp);
 	 }
+
+	public int deleteOne(int[] A) {
+		int n = A.length;
+		int[] prefixGCD = new int[n];
+		int[] suffixGCD = new int[n];
+		prefixGCD[0] = A[0];
+		suffixGCD[n - 1] = A[n - 1];
+		for(int i = 1; i < n; i++){
+			prefixGCD[i] = gcdRec(prefixGCD[i - 1], A[i]);
+		}
+		for(int i = n - 2; i >= 0; i--){
+			suffixGCD[i] = gcdRec(suffixGCD[i + 1], A[i]);
+		}
+
+		int maxGCD = 1;
+		for(int i = 0; i < n;i++){
+			int curGCD;
+			if(i == 0){
+				curGCD = suffixGCD[i + 1];
+			}
+			else if( i == n - 1){
+				curGCD = prefixGCD[ i - 1];
+			}
+			else{
+				curGCD = gcdRec(prefixGCD[i - 1], suffixGCD[i + 1]);
+			}
+			maxGCD = Math.max(maxGCD,curGCD);
+		}
+		return maxGCD;
+	}
 
 	public static void main(String[] args) {
 		// System.out.println(Factors.getFactors2(85416));
