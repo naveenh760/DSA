@@ -163,6 +163,41 @@ public class Factors {
 		return maxGCD;
 	}
 
+	public String enumeratingGCD(String A, String B) {
+		if(A.equals(B)){
+			return A;
+		}
+		else{
+			return "1";
+		}
+	}
+
+	public int divisorGame(int A, int B, int C) {
+		int lcm = (B * C) / gcdRec(B,C);
+		return A / lcm;
+	}
+
+	public int pubg(int[] A) {
+		int n = A.length;
+		int gcdArr = A[0];
+		for(int i = 1; i < n; i++){
+			gcdArr = gcdRec(gcdArr, A[i]);
+		}
+		return gcdArr;
+	}
+
+	public int findPosition(int A) {
+		int exp =  (int) (Math.log(A) / Math.log(2));
+		return (int) Math.pow(2, exp);
+	}
+
+	public int repeatedSubtraction(int A, int B) {
+		if(A == 0 || B == 0){
+			return Math.max(A,B);
+		}
+		return 2 * gcdRec(A,B);
+	}
+
 	public static void main(String[] args) {
 		// System.out.println(Factors.getFactors2(85416));
 		/*
