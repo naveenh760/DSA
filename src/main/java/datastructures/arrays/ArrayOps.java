@@ -172,6 +172,18 @@ public class ArrayOps {
 		return count;
 	}
 
+	public int[][] multipleLeftRotate(int[] A, int[] B) {
+		int m = A.length;
+		int n = B.length;
+		int[][] result = new int[n][m];
+		for(int i = 0; i < n; i++){
+			int[] aClone = A.clone();
+			leftRotate(aClone, B[i]);
+			result[i] = aClone;
+		}
+		return result;
+	}
+
 	public static int removeDuplicatesSorted(int arr[]) {
 		int n = arr.length;
 		if (n == 0) {
