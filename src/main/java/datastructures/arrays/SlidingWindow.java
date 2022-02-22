@@ -1,11 +1,12 @@
 package datastructures.arrays;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class SlidingWindow {
 
 	public static void main(String[] args) {
-		int arr[] = {1,4,20,3,10,9};
+		int[] arr = {1,4,20,3,10,9};
 	//	subArraySum(arr, 100);
 		int arr1[] = nBonacci(3, 7);
 		for(int element: arr1) {
@@ -46,33 +47,29 @@ public class SlidingWindow {
 	 * Returns true if the there is a subarray of arr[] with sum equal to 'sum'
 	 * otherwise returns false. Also, prints the result
 	 */
-	public static boolean subArraySum(int arr[],int sum) {
-		int n = arr.length;
-		int curr_sum = arr[0], start = 0, end;
-
-		// Pick a starting point
-		for (end = 1; end <= n; end++) {
-			// If curr_sum exceeds the sum, then remove the starting elements
-			while (curr_sum > sum && start < end - 1) {
-				curr_sum = curr_sum - arr[start];
-				start++;
+	public static ArrayList<Integer> subArraySum(ArrayList<Integer> A, int B) {
+		int n = A.size();
+		int i = 0, j = 0;
+		long currSum = A.get(0);
+		while(j < n){
+			if(currSum == B){
+				break;
 			}
-
-			// If curr_sum becomes equal to sum, then return true
-			if (curr_sum == sum) {
-				int p = end - 1;
-				System.out.println("Sum found between indexes " + start + " and " + p);
-				return true;
+			else if(currSum > B){
+				currSum -= A.get(i);
+				i++;
 			}
-
-			// Add this element to curr_sum
-			if (end < n)
-				curr_sum = curr_sum + arr[end];
-
+			else{
+				j++;
+				if(j < n){
+					currSum += A.get(j);
+				}
+			}
 		}
-
-		System.out.println("No subarray found");
-		return false;
+		if(j == n){
+			return new ArrayList<Integer>(Arrays.asList(-1));
+		}
+		return new ArrayList<Integer>(A.subList(i, j+1));
 	}
 	
 	

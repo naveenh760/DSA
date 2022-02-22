@@ -289,29 +289,24 @@ public class ArrayProbs {
 	}
 	
 	public int longestConsecutive(final int[] A) {
+		int n = A.length;
+		int maxCount = Integer.MIN_VALUE;
 		Set<Integer> set = new HashSet<Integer>();
-		for(int num: A) {
-			set.add(num);
+		for(int i = 0; i < n; i++){
+			set.add(A[i]);
 		}
-		
-		int maxLen = 0;
-		for(int num: A) {
-			if(!set.contains(num - 1)) {
-				int curLen = 1;
-				while(true) {
-					if(set.contains(num + 1)) {
-						curLen++;
-						num++;
-					}
-					else {
-						break;
-					}
+		for(int i = 0; i < n; i++){
+			if(!set.contains(A[i] - 1)){
+				int count = 1;
+				int j = 1;
+				while(set.contains(A[i] + j )){
+					count++;
+					j++;
 				}
-				maxLen = Math.max(maxLen, curLen);
+				maxCount = Math.max(maxCount,count);
 			}
-			
 		}
-		return maxLen;
+		return maxCount;
     }
 
 }
