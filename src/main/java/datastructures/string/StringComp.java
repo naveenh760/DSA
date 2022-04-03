@@ -5,8 +5,6 @@ import java.util.Arrays;
 public class StringComp {
 
 	public static void main(String[] args) {
-		System.out.println(reverseWords(" ram        sai    har  "));
-
 	}
 
 	public static boolean isAnagram(String s1, String s2) {
@@ -92,18 +90,6 @@ public class StringComp {
 		return sb.toString();
 	}
 
-	public static String reverseWords(String A) {
-		A = A.trim();
-		String[] words = A.split("\\s+");
-		int wordCount = words.length;
-		StringBuilder sb = new StringBuilder();
-		int i;
-		for (i = wordCount - 1; i > 0; i--) {
-			sb.append(words[i]+ " ");
-		}
-		sb.append(words[0]);
-		return sb.toString();
-	}
 
 	String reverse(String A) {
 		char[] chars = A.toCharArray();

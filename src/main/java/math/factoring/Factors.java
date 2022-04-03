@@ -191,6 +191,14 @@ public class Factors {
 		return (int) Math.pow(2, exp);
 	}
 
+	public int findPositionLoop(int A){
+		int ans = 2;
+		while(ans * 2 <= A){
+			ans = ans * 2;
+		}
+		return ans;
+	}
+
 	public int repeatedSubtraction(int A, int B) {
 		if(A == 0 || B == 0){
 			return Math.max(A,B);

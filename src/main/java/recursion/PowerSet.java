@@ -1,10 +1,7 @@
 package recursion;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class PowerSet {
 
@@ -61,12 +58,24 @@ public class PowerSet {
 	}
 
 	public static void powerSet(ArrayList<Integer> arr) {
+		Collections.sort(arr);
 		ArrayList<ArrayList<Integer>> ans = new ArrayList<ArrayList<Integer>>();
 		powerSet1(arr, 0, new ArrayList<Integer>(), ans);
-		System.out.println(ans);
+		Comparator<ArrayList<Integer>> comparator = (o1, o2) -> {
+			int minSize = Math.min(o1.size(), o2.size());
+			for (int i = 0; i < minSize; i++) {
+				int c = o1.get(i).compareTo(o2.get(i));
+				if (c != 0) {
+					return c;
+				}
+			}
+			return Integer.compare(o1.size(), o2.size());
+		};
+		Collections.sort(ans,comparator);
 		
 	}
-		
+
+
 	public static void powerSetDup(ArrayList<Integer> arr) {
 		ArrayList<ArrayList<Integer>> ans = new ArrayList<ArrayList<Integer>>();
 		ArrayList<ArrayList<Integer>> freqArr = getFrequency(arr);

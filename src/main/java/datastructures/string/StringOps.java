@@ -57,8 +57,36 @@ public class StringOps {
 		sb.append(firstB);
 		return sb.toString();
 	}
-	
-	
-	
+
+
+	public String reverseWords(String A) {
+		A = A.trim();
+		String[] words = A.split("\\s+");
+		int wordCount = words.length;
+		StringBuilder sb = new StringBuilder();
+		int i;
+		for (i = wordCount - 1; i > 0; i--) {
+			sb.append(words[i]+ " ");
+		}
+		sb.append(words[0]);
+		return sb.toString();
+	}
+
+	String reverse(String A) {
+		char[] chars = A.toCharArray();
+		int n = A.length();
+		int l = 0;
+		int r = n - 1;
+		while (l < r) {
+			char temp = chars[l];
+			chars[l] = chars[r];
+			chars[r] = temp;
+		}
+
+		return new String(chars);
+	}
+
+
+
 
 }

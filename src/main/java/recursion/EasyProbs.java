@@ -54,4 +54,14 @@ public class EasyProbs {
 		
 		reverseArray(arr, start + 1, end - 1);
 	}
+
+	public int anotherSequence(int A) {
+		if(A == 0 || A == 1){
+			return 1;
+		}
+		if(A == 2){
+			return 2;
+		}
+		return anotherSequence(A - 1) + anotherSequence(A - 2) + anotherSequence(A - 3) + A;
+	}
 }

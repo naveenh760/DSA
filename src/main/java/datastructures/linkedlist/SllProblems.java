@@ -67,6 +67,32 @@ public class SllProblems extends SinglyLinkedList{
 		}
 		System.out.println(second.getData());
 	}
+
+	public ListNode removeNthFromEnd(ListNode A, int B) {
+		if(A == null){
+			return null;
+		}
+		ListNode first = A;
+		ListNode second = A;
+		ListNode prev = null;
+		int i = 0;
+		while(first!= null && i < B){
+			first = first.next;
+			i++;
+		}
+		if(first == null){
+			return A.next;
+		}
+
+		while(first!= null){
+			first = first.next;
+			prev = second;
+			second = second.next;
+		}
+		prev.next = second.next;
+		return A;
+	}
+
 	
 	boolean checkSorted(ListNode head) {
 		if(head == null || head.getNext() == null) {
@@ -223,5 +249,41 @@ public class SllProblems extends SinglyLinkedList{
         return head.next;
         
     }
+
+	public ListNode reverseBetween(ListNode A, int B, int C) {
+		if(A == null){
+			return null;
+		}
+		if(A.next == null){
+			return A;
+		}
+		ListNode current = A;
+		ListNode nodeBeforeB = null;
+		for(int i = 1; i < B; i++){
+			nodeBeforeB = current;
+			current = current.next;
+		}
+		ListNode prevHead = current;
+		if(nodeBeforeB != null){
+			nodeBeforeB.next = null;
+		}
+		ListNode prev = null;
+		ListNode next = null;
+		for(int i = 0; i <= C - B; i++){
+			next = current.next;
+			current.next = prev;
+			prev = current;
+			current = next;
+		}
+		ListNode revHead = prev;
+		if(nodeBeforeB != null){
+			nodeBeforeB.next = revHead;
+		}
+		prevHead.next = next;
+		if(B == 1){
+			return revHead;
+		}
+		return A;
+	}
 
 }
