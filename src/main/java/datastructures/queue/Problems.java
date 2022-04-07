@@ -25,4 +25,23 @@ public class Problems {
         return ans;
     }
 
+    public ArrayList<Integer> integerCombinations(int A) {
+        Queue<Integer> que = new LinkedList<Integer>();
+        ArrayList<Integer> ans = new ArrayList<Integer>();
+        que.add(1);
+        que.add(2);
+        que.add(3);
+        int count = 0;
+        while(count < A){
+            int curNum = que.poll();
+            ans.add(curNum);
+            count++;
+            for(int i = 1; i <= 3; i++){
+                int nextNum = curNum*10 + i;
+                que.add(nextNum);
+            }
+        }
+        return ans;
+    }
+
 }
